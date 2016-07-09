@@ -1,4 +1,4 @@
-package com.apps.webpouyaco.bookstore;
+package com.apps.webpouyaco.bookstore.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

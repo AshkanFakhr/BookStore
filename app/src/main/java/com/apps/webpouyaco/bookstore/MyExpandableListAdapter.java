@@ -1,6 +1,7 @@
 package com.apps.webpouyaco.bookstore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +104,11 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             @Override
             //replace my own code here instead of Toast
             // (opening activity, adding text, changing icon, ...)
+
             public void onClick(View v) {
+
+//                Intent intent = new Intent(finalConvertView.getContext(), BookDetails.class);
+
                 Toast.makeText(finalConvertView.getContext()
                         , childText.getText()
                         , Toast.LENGTH_SHORT).show();
