@@ -1,50 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
-    <!--<item android:id="@+id/profile"-->
-    <!--android:title="@string/profile"-->
-    <!--android:icon="@drawable/profile"-->
-    <!--android:orderInCategory="100"-->
-    <!--app:showAsAction="always"-->
-    <!--/>-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/shopBasket"-->
-    <!--android:layout_width="40dp"-->
-    <!--android:layout_height="40dp"-->
-    <!--android:layout_alignParentEnd="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:contentDescription="@string/your_shopping_list"-->
-    <!--android:icon="@drawable/shop_basket"-->
-    <!--android:orderInCategory="200"-->
-    <!--android:src="@drawable/shop_basket"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:layout_marginEnd="10dp"-->
-    <!--android:title="@string/your_shopping_list"-->
-    <!--android:onClick="shopBasketClick"/>-->
-
-    <!--<item android:id="@+id/publishers"-->
-    <!--android:title="@string/publishers"-->
-    <!--android:orderInCategory="300"-->
-    <!--android:icon="@drawable/publishers"-->
-    <!--app:showAsAction="always"/>-->
-
-    <!--<item android:id="@+id/homePage"-->
-    <!--android:title="@string/home_page"-->
-    <!--android:orderInCategory="400"-->
-    <!--android:icon="@drawable/home_page"-->
-    <!--app:showAsAction="always"/>-->
-
-    <item
-        android:id="@+id/action_search"
-        android:actionViewClass="android.widget.SearchView"
-        android:icon="@drawable/search"
-        android:orderInCategory="100"
-        android:title="@string/search"
-        app:showAsAction="ifRoom|collapseActionView" />
-
+<menu>
 
 </menu>
