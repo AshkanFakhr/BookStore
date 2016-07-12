@@ -9,8 +9,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="one">one</string>
-    <string name="two">two</string>
-    <string name="three">three</string>
-    <string name="four">four</string>
+    <string name="books_activity_content">all of books without considering the publisher can be found here!</string>
+    <string name="publishers_activity_content">all books of a special publisher will be found here!</string>
+    <string name="shopping_activity_content">the shopping cart items will be stored and purchased from here!</string>
+    <string name="profile_activity_content">the content of profile activity will be put here!</string>
 </resources>
