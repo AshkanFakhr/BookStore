@@ -2,6 +2,7 @@ package com.apps.webpouyaco.bookstore.volley;
 
 import com.apps.webpouyaco.bookstore.utils.LruBitmapCache;
 import android.app.Application;
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -21,11 +22,13 @@ public class AppController extends Application {
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
+    public static Context applicationContext = null;
     private static AppController mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        applicationContext = getApplicationContext();
         mInstance = this;
     }
 
