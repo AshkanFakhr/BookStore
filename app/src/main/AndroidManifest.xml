@@ -3,7 +3,6 @@
     package="com.apps.webpouyaco.bookstore">
 
     <application
-        android:name="com.apps.webpouyaco.bookstore.volley.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,25 +22,20 @@
 
         <activity android:name=".BookDetails" />
 
-        <activity android:name=".SearchActivity"
-            android:parentActivityName="com.apps.webpouyaco.bookstore.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
+        <!--<activity android:name=".SearchActivity">-->
+            <!--&lt;!&ndash; ***search codes &ndash;&gt;-->
+            <!--&lt;!&ndash;<intent-filter>&ndash;&gt;-->
+                <!--&lt;!&ndash;<action android:name="android.intent.action.SEARCH" />&ndash;&gt;-->
+            <!--&lt;!&ndash;</intent-filter>&ndash;&gt;-->
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.apps.webpouyaco.bookstore.MainActivity" />
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:resource="@xml/searchable" />
-        </activity>
+            <!--&lt;!&ndash;<meta-data&ndash;&gt;-->
+                <!--&lt;!&ndash;android:name="android.app.searchable"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:resource="@xml/searchable" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<meta-data&ndash;&gt;-->
+                <!--&lt;!&ndash;android:name="android.app.default_searchable"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:resource="@xml/searchable" />&ndash;&gt;-->
+        <!--</activity>-->
 
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
