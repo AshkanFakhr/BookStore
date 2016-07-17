@@ -9,14 +9,16 @@
         android:id="@+id/searchActivityToolbar"
         layout="@layout/search_activity_toolbar" />
 
-    <ExpandableListView
-        android:id="@+id/expandableListView_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/searchActivityToolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-    </ExpandableListView>
+    <ImageView
+        android:id="@+id/search_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/search"
+        android:src="@drawable/search"
+        android:title="@string/search"
+        android:onClick="searchViewClick" />
 
 </RelativeLayout>

@@ -1,44 +1,34 @@
 package com.apps.webpouyaco.bookstore;
 
 import android.app.ProgressDialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-
-import java.util.List;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.apps.webpouyaco.bookstore.R;
 import com.apps.webpouyaco.bookstore.fragments.FourFragment;
 import com.apps.webpouyaco.bookstore.fragments.OneFragment;
 import com.apps.webpouyaco.bookstore.fragments.ThreeFragment;
 import com.apps.webpouyaco.bookstore.fragments.TwoFragment;
 import com.apps.webpouyaco.bookstore.volley.AppController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-    viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -71,9 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -86,16 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void shopBasketClick(View view) {
-
-    }
-
     public void searchClick(View view) {
-
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
 
+    // tab layout icons
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
@@ -112,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-
-    public void getBook (View view){
+    // fragment 1 code (home page)
+    public void getBook(View view) {
+        final String tag_string_req = "string_req";
         String url = "http://api.androidhive.info/volley/string_response.html";
 
         final ProgressDialog pDialog = new ProgressDialog(this);
@@ -124,11 +109,12 @@ public class MainActivity extends AppCompatActivity {
                 url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d(tag_string_req, response.toString());
                 pDialog.hide();
 
 
                 TextView tv = (TextView) findViewById(R.id.textView1);
-                tv.setText(response);
+                tv.setText(response.toString());
                 findViewById(R.id.explanation1).setVisibility(View.INVISIBLE);
 
 
@@ -137,15 +123,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(tag_string_req, "Error: " + error.getMessage());
                 pDialog.hide();
             }
         });
 
 // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, "cancelesh");
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    public void getPublishers (View view){
+    // fragment 2 code (publishers page)
+    public void getPublishers(View view) {
+        String tag_string_req = "string_req";
         String url = "http://api.androidhive.info/volley/string_response.html";
 
         final ProgressDialog pDialog = new ProgressDialog(this);
@@ -174,9 +163,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, "cancelesh");
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
+    // tab layout code
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();

@@ -1,31 +1,28 @@
 package com.apps.webpouyaco.bookstore;
 
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ExpandableListView;
-import android.widget.SearchView;
-import android.widget.Toast;
+import android.view.View;
 
-import java.util.ArrayList;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.apps.webpouyaco.bookstore.volley.AppController;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
-public class SearchActivity extends AppCompatActivity
-        implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
-
-    private SearchManager searchManager;
-    private SearchView searchView;
-    private MyExpandableListAdapter listAdapter;
-    private ExpandableListView myList;
-    private ArrayList<ParentRow> parentList = new ArrayList<ParentRow>();
-    private ArrayList<ParentRow> showTheseParentList = new ArrayList<ParentRow>();
-    private MenuItem searchItem;
+public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,106 +33,63 @@ public class SearchActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Intent searchIntent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(searchIntent.getAction())) {
-
-            String query = searchIntent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(SearchActivity.this, query, Toast.LENGTH_LONG).show();
-        }
-
-        searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-        parentList = new ArrayList<ParentRow>();
-        showTheseParentList = new ArrayList<ParentRow>();
-
-        //the app will crash if display list is not called here.
-        displayList();
-
-        //this expands the list of continents.
-        expandAll();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-
         return super.onCreateOptionsMenu(menu);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        Toast.makeText(this, "search button selected", Toast.LENGTH_SHORT).show();
-
-        searchView = (android.widget.SearchView) MenuItemCompat.getActionView(item);
-
-        if (searchView != null) {
-            searchView.setSearchableInfo
-                    (searchManager.getSearchableInfo(getComponentName()));
-            searchView.setIconifiedByDefault(false);
-            searchView.setOnQueryTextListener(this);
-            searchView.setOnCloseListener(this);
-            searchView.requestFocus();
-        }
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadData() {
-        ArrayList<ChildRow> childRows = new ArrayList<ChildRow>();
-        ParentRow parentRow = null;
-
-        childRows.add(new ChildRow(R.mipmap.ic_launcher, "test text"));
-        childRows.add(new ChildRow(R.mipmap.ic_launcher, "test text2"));
-        parentRow = new ParentRow("first group", childRows);
-        parentList.add(parentRow);
-
-        childRows = new ArrayList<ChildRow>();
-
-        childRows.add(new ChildRow(R.mipmap.ic_launcher, "test text3"));
-        childRows.add(new ChildRow(R.mipmap.ic_launcher, "test text4"));
-        parentRow = new ParentRow("second group", childRows);
-        parentList.add(parentRow);
+    public void searchViewClick(View view) {
+        getBook(view);
     }
 
-    @Override
-    public boolean onClose() {
-        listAdapter.filterData("");
-        expandAll();
-        return false;
-    }
+    // Json object request or string request???
+    public void getBook(View view) {
+        final String tag_json_obj = "json_obj_req";
+        String url = "http://api.androidhive.info/volley/person_object.json";
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        listAdapter.filterData(query);
-        expandAll();
-        return false;
-    }
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        listAdapter.filterData(newText);
-        expandAll();
-        return false;
-    }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(tag_json_obj, response.toString());
+                        pDialog.hide();
 
-    private void expandAll() {
-        int count = listAdapter.getGroupCount();
-        for (int i = 0; i < count; i++) {
-            myList.expandGroup(i);
-        }
-    }
+//                TextView tv = (TextView) findViewById(R.id.textView1);
+//                tv.setText(response.toString());
+                        findViewById(R.id.explanation1).setVisibility(View.INVISIBLE);
+                    }
+                }, new Response.ErrorListener() {
 
-    private void displayList() {
-        loadData();
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(tag_json_obj, "Error: " + error.getMessage());
+                pDialog.hide();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("name", "Androidhive");
+                params.put("email", "abc@androidhive.info");
+                params.put("password", "password123");
 
-        myList = (ExpandableListView) findViewById(R.id.expandableListView_search);
-        listAdapter = new MyExpandableListAdapter(this, parentList);
+                return params;
+            }
 
-        myList.setAdapter(listAdapter);
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 }
