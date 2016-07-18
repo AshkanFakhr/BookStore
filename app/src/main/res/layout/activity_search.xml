@@ -17,7 +17,6 @@
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
         android:contentDescription="@string/search"
-        android:onClick="searchViewClick"
         android:src="@drawable/search"
         android:title="@string/search" />
 
@@ -27,7 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchActivityToolbar"
         android:layout_centerHorizontal="true"
-        android:onClick="getBook"
         android:text="get books" />
 
     <TextView

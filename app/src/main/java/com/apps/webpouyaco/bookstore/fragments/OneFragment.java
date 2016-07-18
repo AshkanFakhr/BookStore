@@ -30,5 +30,4 @@ public class OneFragment extends Fragment {
     }
 
 
-
 }

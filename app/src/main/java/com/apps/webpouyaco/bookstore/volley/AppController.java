@@ -1,6 +1,5 @@
 package com.apps.webpouyaco.bookstore.volley;
 
-import com.apps.webpouyaco.bookstore.utils.LruBitmapCache;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
@@ -9,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.apps.webpouyaco.bookstore.utils.LruBitmapCache;
 
 /**
  * Created by Web Pouya Co on 7/12/2016.
@@ -16,8 +16,7 @@ import com.android.volley.toolbox.Volley;
 
 public class AppController extends Application {
 
-    public static final String TAG = AppController.class
-            .getSimpleName();
+    public static final String TAG = AppController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
