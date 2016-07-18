@@ -109,12 +109,12 @@ public class MainActivity extends AppCompatActivity {
                 url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d(tag_string_req, response.toString());
+                Log.d(tag_string_req, response);
                 pDialog.hide();
 
 
                 TextView tv = (TextView) findViewById(R.id.textView1);
-                tv.setText(response.toString());
+                tv.setText(response);
                 findViewById(R.id.explanation1).setVisibility(View.INVISIBLE);
 
 

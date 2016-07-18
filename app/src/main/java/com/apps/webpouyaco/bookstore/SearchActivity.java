@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -64,9 +65,8 @@ public class SearchActivity extends AppCompatActivity {
                         Log.d(tag_json_obj, response.toString());
                         pDialog.hide();
 
-//                TextView tv = (TextView) findViewById(R.id.textView1);
-//                tv.setText(response.toString());
-                        findViewById(R.id.explanation1).setVisibility(View.INVISIBLE);
+                        TextView tv = (TextView) findViewById(R.id.get_search_txt);
+                        tv.setText(response.toString());
                     }
                 }, new Response.ErrorListener() {
 
