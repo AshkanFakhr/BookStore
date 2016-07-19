@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="get publishers"
-        android:id="@+id/button"
+        android:id="@+id/two_frag_get_pub_btn"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:onClick="getPublishers"/>
@@ -16,8 +16,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/button"
+        android:id="@+id/two_frag_get_pub_txt"
+        android:layout_below="@+id/two_frag_get_pub_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp" />
 
