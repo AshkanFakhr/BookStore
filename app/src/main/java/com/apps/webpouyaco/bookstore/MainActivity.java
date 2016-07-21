@@ -10,33 +10,23 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request.Method;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.apps.webpouyaco.bookstore.fragments.FourFragment;
-import com.apps.webpouyaco.bookstore.fragments.OneFragment;
-import com.apps.webpouyaco.bookstore.fragments.ThreeFragment;
-import com.apps.webpouyaco.bookstore.fragments.TwoFragment;
-import com.apps.webpouyaco.bookstore.volley.AppController;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.apps.webpouyaco.bookstore.fragments.HomePage;
+import com.apps.webpouyaco.bookstore.fragments.ProfilePage;
+import com.apps.webpouyaco.bookstore.fragments.PublishersPage;
+import com.apps.webpouyaco.bookstore.fragments.ShoppingCartPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    //setting icons for tab layout
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private int[] tabIcons = {
@@ -46,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.profile
     };
 
-    // json object response url
-    private String urlJsonObjBook = "http://api.androidhive.info/volley/person_object.json";
-    private String urlJsonObjPub = "http://api.androidhive.info/volley/person_object.json";
 
     private static String TAG = MainActivity.class.getSimpleName();
     private Button btnMakeObjectRequestBook, btnMakeObjectRequestPub;
@@ -68,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.findViewById(R.id.search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchClick(v);
+            }
+        });
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -137,168 +130,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "ONE");
-        adapter.addFragment(new TwoFragment(), "TWO");
-        adapter.addFragment(new ThreeFragment(), "THREE");
-        adapter.addFragment(new FourFragment(), "FOUR");
+        adapter.addFragment(new HomePage(), "ONE");
+        adapter.addFragment(new PublishersPage(), "TWO");
+        adapter.addFragment(new ShoppingCartPage(), "THREE");
+        adapter.addFragment(new ProfilePage(), "FOUR");
         viewPager.setAdapter(adapter);
     }
 
-    // fragment 1 code (home page)
-
     /**
      * Method to make json object request where json response starts wtih {
      */
-
-    // Json object request or string request???
-    public void makeJsonObjectRequestBook() {
-
-        showpDialog();
-
-        JsonObjectRequest jsonObjReqBook = new JsonObjectRequest(Method.GET,
-                urlJsonObjBook, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
-
-                try {
-                    // Parsing json object response
-                    // response will be a json object
-                    String name = response.getString("name");
-                    String email = response.getString("email");
-                    JSONObject phone = response.getJSONObject("phone");
-                    String home = phone.getString("home");
-                    String mobile = phone.getString("mobile");
-
-                    jsonResponseBook = "";
-                    jsonResponseBook += "Name: " + name + "\n\n";
-                    jsonResponseBook += "Email: " + email + "\n\n";
-                    jsonResponseBook += "Home: " + home + "\n\n";
-                    jsonResponseBook += "Mobile: " + mobile + "\n\n";
-
-                    txtResponseBook.setText(jsonResponseBook);
-                    findViewById(R.id.explanation1).setVisibility(View.INVISIBLE);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),
-                            "Error: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-                hidepDialog();
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                hidepDialog();
-            }
-        });
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReqBook);
-    }
-
-
-    /*public void getBook(View view) {
-        final String tag_string_req = "string_req";
-        String url = "http://api.androidhive.info/volley/string_response.html";
-
-        final ProgressDialog pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-        StringRequest strReq = new StringRequest(Request.Method.GET,
-                url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(tag_string_req, response);
-                pDialog.hide();
-
-
-                TextView tv = (TextView) findViewById(R.id.textView1);
-                tv.setText(response);
-                findViewById(R.id.explanation1).setVisibility(View.INVISIBLE);
-
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(tag_string_req, "Error: " + error.getMessage());
-                pDialog.hide();
-            }
-        });
-
-// Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }*/
-
-    // fragment 2 code (publishers page)
-
-    /**
-     * Method to make json object request where json response starts wtih {
-     */
-    private void makeJsonObjectRequestPub() {
-
-        showpDialog();
-
-        JsonObjectRequest jsonObjReqPub = new JsonObjectRequest(Method.GET,
-                urlJsonObjPub, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
-
-                try {
-                    // Parsing json object response
-                    // response will be a json object
-                    String name = response.getString("name");
-                    String email = response.getString("email");
-                    JSONObject phone = response.getJSONObject("phone");
-                    String home = phone.getString("home");
-                    String mobile = phone.getString("mobile");
-
-                    jsonResponsePub = "";
-                    jsonResponsePub += "Name: " + name + "\n\n";
-                    jsonResponsePub += "Email: " + email + "\n\n";
-                    jsonResponsePub += "Home: " + home + "\n\n";
-                    jsonResponsePub += "Mobile: " + mobile + "\n\n";
-
-                    txtResponsePub.setText(jsonResponsePub);
-                    findViewById(R.id.explanation2).setVisibility(View.INVISIBLE);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),
-                            "Error: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-                hidepDialog();
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                hidepDialog();
-            }
-        });
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReqPub);
-    }
-
 
     /*public void getPublishers(View view) {
         String tag_string_req = "string_req";
@@ -341,14 +182,6 @@ public class MainActivity extends AppCompatActivity {
     private void hidepDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
-    }
-
-    public void getBook(View view) {
-        makeJsonObjectRequestBook();
-    }
-
-    public void getPublishers(View view) {
-        makeJsonObjectRequestPub();
     }
 
 

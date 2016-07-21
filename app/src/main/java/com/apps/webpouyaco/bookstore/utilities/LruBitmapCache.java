@@ -1,12 +1,12 @@
-package com.apps.webpouyaco.bookstore.utils;
-
-import com.android.volley.toolbox.ImageLoader.ImageCache;
+package com.apps.webpouyaco.bookstore.utilities;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 
+import com.android.volley.toolbox.ImageLoader.ImageCache;
+
 /**
- * Created by Web Pouya Co on 7/12/2016.
+ * Created by Ashkan on 7/12/2016.
  */
 
 public class LruBitmapCache extends LruCache<String, Bitmap> implements

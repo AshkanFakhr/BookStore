@@ -1,4 +1,4 @@
-package com.apps.webpouyaco.bookstore.volley;
+package com.apps.webpouyaco.bookstore;
 
 import android.app.Application;
 import android.content.Context;
@@ -8,10 +8,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.apps.webpouyaco.bookstore.utils.LruBitmapCache;
+import com.apps.webpouyaco.bookstore.utilities.LruBitmapCache;
 
 /**
- * Created by Web Pouya Co on 7/12/2016.
+ * Created by Ashkan on 7/12/2016.
  */
 
 public class AppController extends Application {

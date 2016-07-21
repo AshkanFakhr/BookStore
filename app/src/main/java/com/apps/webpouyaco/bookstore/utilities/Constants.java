@@ -1,4 +1,4 @@
-package com.apps.webpouyaco.bookstore.utils;
+package com.apps.webpouyaco.bookstore.utilities;
 
 /**
  * Created by Ashkan on 7/14/2016.
@@ -11,18 +11,12 @@ import java.text.DecimalFormat;
  */
 public class Constants {
 
-
-
-
-
     //request tags:
-
 
     //Name Strings:
     public static String LOG_TAG = "**** DEBUG****";
 
     // local
-
 
     //Shared Pref Keys
     public static String SP_FILE_NAME_BASE = "sp_file_base";

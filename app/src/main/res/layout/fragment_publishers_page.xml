@@ -2,30 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.OneFragment">
+    tools:context=".fragments.HomePage">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="get books"
-        android:id="@+id/one_frag_get_book_btn"
+        android:text="get publishers"
+        android:id="@+id/two_frag_get_pub_btn"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="getBook"/>
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/one_frag_get_book_txt"
-        android:layout_below="@+id/one_frag_get_book_btn"
+        android:id="@+id/two_frag_get_pub_txt"
+        android:layout_below="@+id/two_frag_get_pub_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/explanation1"
-        android:text="@string/books_activity_content"
+        android:id="@+id/explanation2"
+        android:text="@string/publishers_activity_content"
         android:padding="10dp"
         android:gravity="center"
         android:textSize="40sp"

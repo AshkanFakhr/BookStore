@@ -10,8 +10,7 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        >
+        android:layout_alignParentTop="true">
 
 
         <android.support.design.widget.AppBarLayout
@@ -50,11 +49,10 @@
                         android:id="@+id/search"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginRight="10dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
                         android:contentDescription="@string/search"
-                        android:onClick="searchClick"
                         android:src="@drawable/search"
                         android:title="@string/search" />
 

@@ -1,4 +1,4 @@
-package com.apps.webpouyaco.bookstore.utils;
+package com.apps.webpouyaco.bookstore.utilities;
 
 /**
  * Created by Ashkan on 7/14/2016.
@@ -18,8 +18,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
-
-import com.apps.webpouyaco.bookstore.volley.AppController;
+import com.apps.webpouyaco.bookstore.AppController;
 import com.apps.webpouyaco.bookstore.R;
 
 import java.io.File;
